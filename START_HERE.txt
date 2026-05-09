@@ -1,0 +1,166 @@
+══════════════════════════════════════════════��═════════════════════════════
+  🚀 PAYMENT AUTHORIZATION MICROSERVICE
+  Fiserv Interview Project - Production-Ready
+════════════════════════════════════════════════════════════════════════════
+
+Bem-vindo! Este é um microsserviço PROFISSIONAL que demonstra:
+
+   ✅ Arquitetura Hexagonal (Ports & Adapters)
+   ✅ Design Patterns (Chain of Responsibility, Strategy, Builder, Factory, Decorator, Adapter)
+   ✅ Java 17 + Spring Boot 3.2.3
+   ✅ Async com Kafka + PostgreSQL
+   ✅ Testes com TDD
+   ✅ Docker & Kubernetes
+   ✅ Documentação completa
+
+════════════════════════════════════════════════════════════════════════════
+  ⚡ START AGORA (2 opções)
+════════════════════════════════════════════════════════════════════════════
+
+OPÇÃO 1 - INTERATIVO (Recomendado!)
+
+  $ ./start.sh
+
+  Escolha opção 1: "Start with Docker Compose"
+  Aguarde 2-3 minutos...
+  Pronto!
+
+OPÇÃO 2 - DIRETO
+
+  $ docker-compose up --build
+
+  Aguarde até ver: "payment-authorization-service listening on port 8080"
+
+════════════════════════════════════════════════════════════════════════════
+  ✨ ACESSE
+════════════════════════════════════════════════════════════════════════════
+
+  🌐 API Documentation:  http://localhost:8080/swagger-ui.html
+  💬 Kafka Monitoring:   http://localhost:8888
+  🏥 Health Check:       http://localhost:8080/actuator/health
+
+════════════════════════════════════════════════════════════════════════════
+  ���� DOCUMENTAÇÃO (por ordem de leitura)
+════════════════════════════════════════════════════════════════════════════
+
+  1️⃣  QUICKSTART.md          ← Comece aqui (5 minutos)
+  2️⃣  README.md              ← Documentação completa
+  3️⃣  ARCHITECTURE.md        ← Design patterns explicados
+  4️⃣  DEPLOYMENT.md          ← Deploy em produção
+  5️⃣  PROJECT_SUMMARY.md     ← Visão geral do projeto
+  6️⃣  CONTRIBUTING.md        ← Como estender
+  7️⃣  COMMANDS.md            ← Referência de comandos
+
+════════════════════════════════════════════════════════════════════════════
+  🧪 TESTE RÁPIDO (após iniciar)
+════════════════════════════════════════════════════════════════════════════
+
+  curl -X POST http://localhost:8080/api/v1/transactions/authorize \
+    -H "Content-Type: application/json" \
+    -d '{
+      "card_number": "4111111111111111",
+      "card_holder": "John Doe",
+      "bin": "411111",
+      "expiry_month": "12",
+      "expiry_year": "2025",
+      "merchant_id": "MERCHANT123",
+      "amount": 150.50,
+      "currency": "BRL"
+    }'
+
+  Response esperado:
+  {
+    "transaction_id": "TXN_...",
+    "status": "APPROVED",
+    "authorization_code": "VISA_...",
+    "fraud_score": "LOW"
+  }
+
+════════════════════════════════════════════════════════════════════════════
+  🏗️ ARQUITETURA
+════════════════════════════════════════════════════════════════════════════
+
+  Domain Layer (PURO - sem frameworks)
+    ├─ Transaction, Card, Merchant (Value Objects)
+    ├─ TransactionAuthorizationService (Use Case)
+    └─ Ports (Interfaces abstratas)
+
+  Application Layer (ORQUESTRAÇÃO)
+    ├─ Validation Chain (Chain of Responsibility)
+    ├─ Fraud Strategy (Strategy Pattern)
+    └─ Payment Processor (Factory + Decorator)
+
+  Infrastructure Layer (IMPLEMENTAÇÕES)
+    ├─ JPA Adapter (PostgreSQL)
+    ├─ Kafka Adapter (Events)
+    └─ REST Controller (HTTP)
+
+════════════════════════════════════════════════════════════════════════════
+  📊 STACK TÉCNICO
+════════════════════════════════════════════════════════════════════════════
+
+  Java 17
+  Spring Boot 3.2.3
+  PostgreSQL 15
+  Apache Kafka 7.5
+  Docker & Docker Compose
+  Kubernetes (ready)
+  Maven 3.8+
+  JUnit 5
+  Mockito
+
+══════════════════════════════════���═════════════════════════════════════════
+  💡 KEY FEATURES
+════════════════════════════════════════════════════════════════════════════
+
+  ✅ Pipeline de Validação Extensível (Chain of Responsibility)
+  ✅ Detecção de Fraude Configurável (Strategy)
+  ✅ Processamento Assíncrono de Eventos (Kafka)
+  ✅ Persistência Relacional (PostgreSQL + JPA)
+  ✅ OpenAPI/Swagger Documentation
+  ✅ Health Checks & Metrics (Prometheus)
+  ✅ Auditoria de Transações
+  ✅ Suporte Multi-cartão (Visa, MasterCard)
+  ✅ TDD com Unit + Integration Tests
+  ✅ Production-Ready (Security, Logging, Monitoring)
+
+════════════════════════════════════════════════════════════════════════════
+  🎯 DEMONSTRAÇÕES DE EXPERTISE
+════════════════════════════════════════════════════════════════════════════
+
+  ✅ Arquitetura Hexagonal (não trivial!)
+  ✅ 7 Design Patterns aplicados naturalmente
+  ✅ Clean Code & SOLID principles
+  ✅ Test-Driven Development
+  ✅ Async messaging patterns
+  ✅ Database design com índices
+  ✅ Docker multi-stage builds
+  ✅ Kubernetes manifests
+  ✅ CI/CD ready
+  ✅ Documentação técnica completa
+
+════════════════════════════════════════════════════════════════════════════
+  🆘 HELP
+════════��═══════════════════════════════════════════════════════════════════
+
+  Para entender a lógica:           README.md
+  Para entender a arquitetura:      ARCHITECTURE.md
+  Para estender o projeto:          CONTRIBUTING.md
+  Para rodar em produção:           DEPLOYMENT.md
+  Para comandos úteis:              COMMANDS.md
+
+════════════════════════════════════════════════════════════════════════════
+  🛑 PARAR SERVIÇOS
+═════════════════════════════════════════════════════���══════════════════════
+
+  $ docker-compose down
+
+  Para limpar tudo (volumes, imagens):
+  $ docker-compose down -v
+
+═══════════════════════════════════════════════════════════��════════════════
+
+Desenvolvido para impressionar: Arquiteto e Líder Técnico da Fiserv
+
+🚀 Bom trabalho!
+
