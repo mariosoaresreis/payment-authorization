@@ -57,22 +57,22 @@ public class TransactionAuthorizationController {
     public ResponseEntity<AuthorizeTransactionResponse> authorizeTransaction(
             @RequestBody AuthorizeTransactionRequest request) {
 
-        logger.info("Received authorization request for merchant: {}", request.getMerchantId());
+        logger.info("Received authorization request for merchant: {}", request.merchantId());
 
         try {
             // Build domain models from request DTO
             Card card = new Card(
-                request.getCardNumber(),
-                request.getCardHolder(),
-                request.getBin(),
-                CardBrand.fromBin(request.getBin()),
-                request.getExpiryMonth(),
-                request.getExpiryYear()
+                request.cardNumber(),
+                request.cardHolder(),
+                request.bin(),
+                CardBrand.fromBin(request.bin()),
+                request.expiryMonth(),
+                request.expiryYear()
             );
 
             // Mock merchant lookup - in real scenario would query from database
             Merchant merchant = new Merchant(
-                request.getMerchantId(),
+                request.merchantId(),
                 "Test Merchant",
                 "5411",
                 "BR",
@@ -80,8 +80,8 @@ public class TransactionAuthorizationController {
                 RiskLevel.MEDIUM
             );
 
-            Transaction transaction = new Transaction(card, merchant, request.getAmount(),
-                Currency.valueOf(request.getCurrency()));
+            Transaction transaction = new Transaction(card, merchant, request.amount(),
+                Currency.valueOf(request.currency()));
 
             // Generate transaction ID
             String transactionId = "TXN_" + System.currentTimeMillis() + "_" +
