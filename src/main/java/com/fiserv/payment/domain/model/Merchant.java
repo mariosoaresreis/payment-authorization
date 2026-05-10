@@ -1,5 +1,7 @@
 package com.fiserv.payment.domain.model;
 
+import java.math.BigDecimal;
+
 /**
  * Merchant information. Pure domain model.
  */
@@ -47,7 +49,5 @@ public class Merchant {
     }
 }
 
-enum RiskLevel {
-    LOW, MEDIUM, HIGH
-}
+
 

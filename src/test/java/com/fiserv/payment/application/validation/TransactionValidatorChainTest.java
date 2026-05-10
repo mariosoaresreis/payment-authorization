@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.Year;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,9 +16,12 @@ public class TransactionValidatorChainTest {
 
     private TransactionValidator validationChain;
     private Transaction validTransaction;
+    private String validExpiryYear;
 
     @BeforeEach
     public void setup() {
+        validExpiryYear = String.valueOf(Year.now().plusYears(2).getValue());
+
         // Build validation chain
         CardExpiryValidator cardExpiryValidator = new CardExpiryValidator();
         BinValidator binValidator = new BinValidator();
@@ -30,7 +34,7 @@ public class TransactionValidatorChainTest {
 
         // Create valid transaction
         Card card = new Card("4111111111111111", "John Doe", "411111",
-            CardBrand.VISA, "12", "2025");
+            CardBrand.VISA, "12", validExpiryYear);
         Merchant merchant = new Merchant("MERCHANT123", "Test Merchant", "5411",
             "BR", new BigDecimal("10000"), RiskLevel.MEDIUM);
         validTransaction = new Transaction(card, merchant, new BigDecimal("100"), Currency.BRL);
@@ -59,7 +63,7 @@ public class TransactionValidatorChainTest {
     @Test
     public void testHighAmountExceedsLimit() {
         Card card = new Card("4111111111111111", "John Doe", "411111",
-            CardBrand.VISA, "12", "2025");
+            CardBrand.VISA, "12", validExpiryYear);
         Merchant merchant = new Merchant("MERCHANT123", "Test Merchant", "5411",
             "BR", new BigDecimal("5000"), RiskLevel.MEDIUM);  // Daily limit 5000
         Transaction highAmountTransaction = new Transaction(card, merchant,
